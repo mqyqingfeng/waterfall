@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+    <title>瀑布流效果</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+    <div id="waterfall">
+<!--         <div class="pin">
+            <img src="img/1.jpeg" alt="妹子">
+            <p class="description">文字</p>
+        </div>
+        <div class="pin">
+            <img src="img/2.jpeg" alt="妹子">
+            <p class="description">文字</p>
+        </div>
+        <div class="pin">
+            <img src="img/3.jpeg" alt="妹子">
+            <p class="description">文字</p>
+        </div>
+        <div class="pin">
+            <img src="img/4.jpeg" alt="妹子">
+            <p class="description">文字</p>
+        </div>
+        <div class="pin">
+            <img src="img/5.jpeg" alt="妹子">
+            <p class="description">文字</p>
+        </div>
+        <div class="pin">
+            <img src="img/6.jpeg" alt="妹子">
+            <p class="description">文字</p>
+        </div>
+        <div class="pin">
+            <img src="img/7.jpeg" alt="妹子">
+            <p class="description">文字</p>
+        </div>
+        <div class="pin">
+            <img src="img/8.jpeg" alt="妹子">
+            <p class="description">文字</p>
+        </div>
+        <div class="pin">
+            <img src="img/9.jpeg" alt="妹子">
+            <p class="description">文字</p>
+        </div> -->
+    </div>
+    <div class="loader" id="loader">
+        <div class="loader-inner line-spin-fade-loader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <script type="text/javascript" src="js/waterfall.js"></script>
+    <script>
+    	window.onload = function(){
+
+    		var waterfall = new WaterFall({
+    		    container: '#waterfall',
+    		    pins: ".pin",
+    		    loader: '#loader',
+    		    gapHeight: 20,
+    		    gapWidth: 20,
+    		    pinWidth: 216,
+                threshold: 100
+    		});
+
+    		waterfall.on("load", function(){
+
+    			setTimeout(function(){
+
+    				// 生成模拟数据
+    				var mockData = {
+    				    data: []
+    				};
+    				for (var i = 0; i < 10; i++) {
+    				    mockData.data[i] = {
+    				        src: 'img/' + Math.ceil(Math.random() * 18) + '.jpeg',
+    				        title: '图片' + Math.ceil(Math.random() * 18)
+    				    }
+    				}
+
+                    var arr = [];
+                    for (var i = 0, len = mockData.data.length; i < len; i++) {
+                        var data = mockData.data[i];
+                        arr.push('<div class="pin"><img src="' + data.src + '" class="img" alt="'+ data.title +'"> <p class="description">'+ data.title +'</p></div>')
+                    }
+
+    				// 调用 append 方法 检验是否所有的图片都具有高度后才会 append 进文档树中
+    				waterfall.append(arr.join(''), '.img')
+    			}, 1000)
+    		})
+    	}
+    </script>
+</body>
+
+</html>
